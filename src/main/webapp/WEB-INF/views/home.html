@@ -6,11 +6,11 @@
 <div align="center">
     <h3>H O M E</h3>
     <p>
-        <a th:href="@{/create}">Add new students</a>
+        <a th:href="@{/create-student}">Add new students</a>
     </p>
     <div>
         <form th:href="@{/search-by-name}">
-            <input type="text" >
+            <input type="text">
             <button>Search</button>
         </form>
     </div>
@@ -19,6 +19,7 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Avatar</th>
             <th>Class_Room</th>
             <th>Birthday</th>
             <th>Edit</th>
@@ -31,11 +32,19 @@
             <td th:text="${student.email}"></td>
             <td th:text="${student.classRoom.getName()}"></td>
             <td th:text="${student.birthday}"></td>
+            <td><img th:href="@{student.avatar}" width="100" , height="100"></td>
             <td><a th:href="@{/students/__${student.id}__/edit}">edit</a></td>
             <td><a th:href="@{/students/__${student.id}__/delete}">delete</a></td>
         </tr>
         </tbody>
     </table>
+    <span>
+        <a th:if="${students.hasPrevious()}" th:href="@{/home (students=${students.number - 1})}">Back</a>
+    </span>
+    <span th:text="${students.number}"></span>/<span th:text="${students.totalPages}"></span>
+    <span>
+                <a th:if="${students.hasNext()}" th:href="@{/home (students=${students.number + 1})}">Next</a>
+    </span>
     <footer th:replace="/layout :: footer"></footer>
 </div>
 </body>

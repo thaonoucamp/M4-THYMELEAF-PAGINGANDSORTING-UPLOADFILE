@@ -116,4 +116,19 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
         return transactionManager;
     }
 
+    @Override
+    // chỉ cho Spring biết chỗ lấy tài liệu tĩnh.(js,css,img)
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/miniPath/**")
+                .addResourceLocations("file:/Users/thaodangxuan/untitled/src/main/webapp/WEB-INF/image/");
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSizePerFile(10000000);
+        return multipartResolver;
+    }
+
+
 }

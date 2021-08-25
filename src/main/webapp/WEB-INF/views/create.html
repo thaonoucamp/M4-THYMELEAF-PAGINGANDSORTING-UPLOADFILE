@@ -10,8 +10,8 @@
         </a>
     </p>
     <div id="form">
-        <form th:action="@{/save}" th:object="${student}"
-              method="POST" novalidate="novalidate">
+        <form th:action="@{/create-student}" th:object="${student}"
+              method="POST" novalidate="novalidate" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}"/>
             <div>
                 <label>Name</label>
@@ -22,16 +22,17 @@
                 <input type="email" th:field="*{email}"/>
             </div>
             <div>
+                <label>Avatar</label>
+                <input type="file" name="multipartFile"/>
+            </div>
+            <div>
                 <label>Birthday</label>
                 <input type="date" th:field="*{birthday}"/>
             </div>
             <div>
                 <label>Class_Room</label>
                 <select th:field="*{classRoom}">
-                    <option th:each="p : ${classRooms}"
-                            th:value="${p.id}"
-                            th:name="${p.name}">
-                    </option>
+                    <option th:each="p : ${classRooms}" th:value="${p.getId()}" th:text="${p.getName()}"></option>
                 </select>
             </div>
             <input type="submit" value="Save"/>
