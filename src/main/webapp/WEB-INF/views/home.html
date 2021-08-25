@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div align="center">
+    <h3>H O M E</h3>
+    <p>
+        <a th:href="@{/create}">Add new students</a>
+    </p>
+    <div>
+        <form th:href="@{/search-by-name}">
+            <input type="text" >
+            <button>Search</button>
+        </form>
+    </div>
+    <table id="students">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Class_Room</th>
+            <th>Birthday</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.classRoom.getName()}"></td>
+            <td th:text="${student.birthday}"></td>
+            <td><a th:href="@{/students/__${student.id}__/edit}">edit</a></td>
+            <td><a th:href="@{/students/__${student.id}__/delete}">delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <footer th:replace="/layout :: footer"></footer>
+</div>
+</body>
+</html>
