@@ -73,9 +73,7 @@ public class StudentController {
         FileCopyUtils.copy(multipartFile.getBytes(), new File("/Users/thaodangxuan/untitled/src/main/webapp/WEB-INF/image/" + fileName));
         student.setAvatar("/miniPath/" + fileName);
         studentService.save(student);
-        ModelAndView modelAndView = new ModelAndView("/home");
-        modelAndView.addObject("student", student);
-        return modelAndView;
+        return new ModelAndView("redirect:/home");
     }
 //
 //    @GetMapping("/edit-student/{id}")
